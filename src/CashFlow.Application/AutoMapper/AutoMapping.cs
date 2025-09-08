@@ -21,10 +21,10 @@ namespace CashFlow.Application.AutoMapper
 
             CreateMap<ResponseRegisterUserJson, Users>().ReverseMap();
 
-
-
             CreateMap<RegisterExpenseUseCase, Expense>().ReverseMap();
-            CreateMap<ResponseRegisterUserJson, Users>().ReverseMap();
+
+            CreateMap<ResponseUserJson, Users>().ReverseMap();
+
         }
     }
 }

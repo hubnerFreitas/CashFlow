@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace CashFlow.Domain.Repositories.User
 {
-    public interface IUserReadOnlyRepository
+    public  interface IUserUpdateOnlyRepository
     {
-        Task<bool> ExistActiveUserWithEmail(string email);
-
-        Task<Users?> GetUserByEmail(string email);
-        Task<Users?> GetUserById(long Id);
+        void Update(Users user);
     }
 }

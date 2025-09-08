@@ -6,6 +6,7 @@ using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Repositories.Expenses;
 using CashFlow.Domain.Repositories.User;
 using CashFlow.Domain.Sercurity.Cryptography;
+using CashFlow.Domain.Sercurity.Tokens;
 using CashFlow.Exception;
 using CashFlow.Exception.ExceptionBase;
 using FluentValidation.Results;
@@ -19,12 +20,14 @@ namespace CashFlow.Application.UseCases.User.Register
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IPasswordEncripter _passwordEncripter;
+        private readonly IAccessTokenGenerator _tokenGenerator;
 
         public RegisterUserUseCase(
             IUserWriteOnlyRepository userWriteOnlyRepository,
             IUserReadOnlyRepository userReadOnlyRepository,
             IUnitOfWork unitOfWork,
             IPasswordEncripter passwordEncripter,
+            IAccessTokenGenerator tokenGenerator,
             IMapper mapper)
         {
             _userWriteOnlyRepository = userWriteOnlyRepository;
@@ -32,6 +35,7 @@ namespace CashFlow.Application.UseCases.User.Register
             _unitOfWork = unitOfWork;
             _passwordEncripter = passwordEncripter;
             _userReadOnlyRepository = userReadOnlyRepository;
+            _tokenGenerator = tokenGenerator;
         }
 
         public async Task<ResponseRegisterUserJson> Execute(RequestRegisterUserJson request)
@@ -46,7 +50,11 @@ namespace CashFlow.Application.UseCases.User.Register
 
             await _unitOfWork.Commit();
 
-            return _mapper.Map<ResponseRegisterUserJson>(user);
+            return new ResponseRegisterUserJson
+            {
+                Name = user.Name,
+                Token = _tokenGenerator.GenerateToken(user)
+            };
         }
 
         private async void Validate(RequestRegisterUserJson request)

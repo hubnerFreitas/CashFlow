@@ -1,5 +1,5 @@
 ﻿using CashFlow.Application.UseCases.Expenses.Register;
-using CashFlow.Communication.Requests;
+using CashFlow.Communication.Requests.User;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CashFlow.Api.Controllers
