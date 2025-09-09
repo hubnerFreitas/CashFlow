@@ -4,6 +4,6 @@ namespace CashFlow.Application.UseCases.User.GetProfile
 {
     public interface IGetUserProfileUseCase
     {
-        Task<ResponseUserJson> Execute();
+        Task<List<ResponseUserJson>> Execute();
     }
 }

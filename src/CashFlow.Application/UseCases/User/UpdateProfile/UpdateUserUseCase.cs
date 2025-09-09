@@ -3,10 +3,8 @@ using CashFlow.Communication.Requests;
 using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Repositories.User;
 using CashFlow.Domain.Services;
-using CashFlow.Domain.Services.LoggedUser;
 using CashFlow.Exception;
 using CashFlow.Exception.ExceptionBase;
-using CashFlow.Exception.ExceptionsBase;
 using FluentValidation.Results;
 
 namespace CashFlow.Application.UseCases.Users.Update;

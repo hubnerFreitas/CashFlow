@@ -42,7 +42,7 @@ namespace CashFlow.Application.UseCases.User.Register
         {
             Validate(request);
 
-            var user = _mapper.Map<Users>(request);
+            var user = _mapper.Map<Domain.Entities.Users>(request);
             user.Password = _passwordEncripter.Encrypt(request.Password);
             user.UserIdentifier = Guid.NewGuid();
 

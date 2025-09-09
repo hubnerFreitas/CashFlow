@@ -41,6 +41,7 @@ namespace CashFlow.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("{Id}")]
         [ProducesResponseType(typeof(ResponseUserJson), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetProfileById(

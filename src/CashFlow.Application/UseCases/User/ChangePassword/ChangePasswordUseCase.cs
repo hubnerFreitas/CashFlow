@@ -1,5 +1,4 @@
 ﻿using CashFlow.Communication.Requests.User;
-using CashFlow.Domain.Entities;
 using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Repositories.User;
 using CashFlow.Domain.Sercurity.Cryptography;
@@ -34,6 +33,7 @@ namespace CashFlow.Application.UseCases.User.ChangePassword
         public async Task Execute(RequestChangePasswordJson request)
         {
             var loggedUser = await _loggedUser.Get();
+            if (loggedUser is null) throw new System.Exception("User not foud");
 
             Validate(request, loggedUser);
 
@@ -48,7 +48,7 @@ namespace CashFlow.Application.UseCases.User.ChangePassword
             await _unitOfWork.Commit();
         }
 
-        private void Validate(RequestChangePasswordJson request, Users loggedUser)
+        private void Validate(RequestChangePasswordJson request, Domain.Entities.Users loggedUser)
         {
             var validator = new ChangePasswordValidator();
 

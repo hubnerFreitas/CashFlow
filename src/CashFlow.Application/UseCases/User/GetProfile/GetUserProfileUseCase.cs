@@ -1,26 +1,27 @@
 ﻿using AutoMapper;
 using CashFlow.Communication.Responses.User;
+using CashFlow.Domain.Repositories.User;
 using CashFlow.Domain.Services;
 
 namespace CashFlow.Application.UseCases.User.GetProfile
 {
     public class GetUserProfileUseCase : IGetUserProfileUseCase
     {
-        private readonly ILoggedUser _loggedUser;
+        private readonly IUserReadOnlyRepository _userReadOnlyRepository;
         private readonly IMapper _mapper;
 
-        public GetUserProfileUseCase(ILoggedUser loggedUser, IMapper mapper)
+        public GetUserProfileUseCase(IUserReadOnlyRepository usereadOnlyRepository, IMapper mapper)
         {
-            _loggedUser = loggedUser;
+            _userReadOnlyRepository = usereadOnlyRepository;
             _mapper = mapper;
         }
 
 
-        public async Task<ResponseUserJson> Execute()
+        public async Task<List<ResponseUserJson>> Execute()
         {
-            var loggedUser = await  _loggedUser.Get();
+            var loggedUser = await _userReadOnlyRepository.GetAllUsers();
 
-            return _mapper.Map<ResponseUserJson>(loggedUser);
+            return _mapper.Map<List<ResponseUserJson>>(loggedUser);
 
         }
     }

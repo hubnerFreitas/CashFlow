@@ -11,6 +11,7 @@ namespace CashFlow.Domain.Repositories.User
     {
         Task<bool> ExistActiveUserWithEmail(string email);
 
+        Task<List<Users>> GetAllUsers();
         Task<Users?> GetUserByEmail(string email);
         Task<Users?> GetUserById(long Id);
     }
