@@ -6,6 +6,7 @@ using CashFlow.Domain.Sercurity.Tokens;
 using CashFlow.Infrastructure;
 using CashFlow.Infrastructure.Migrations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -49,7 +50,7 @@ builder.Services.AddSwaggerGen(config =>
     });
 });
 
-builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilters)));
+builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();

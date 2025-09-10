@@ -40,7 +40,7 @@ namespace CashFlow.Application.UseCases.User.Register
 
         public async Task<ResponseRegisterUserJson> Execute(RequestRegisterUserJson request)
         {
-            Validate(request);
+            await Validate(request);
 
             var user = _mapper.Map<Domain.Entities.Users>(request);
             user.Password = _passwordEncripter.Encrypt(request.Password);
@@ -57,7 +57,7 @@ namespace CashFlow.Application.UseCases.User.Register
             };
         }
 
-        private async void Validate(RequestRegisterUserJson request)
+        private async Task Validate(RequestRegisterUserJson request)
         {
             var result = new RegisterUserValidator().Validate(request);
 
